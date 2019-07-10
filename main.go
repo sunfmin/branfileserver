@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 )
 
 var address *string = flag.String("a", "localhost:8000", "Address (host:port) to listen on")
@@ -19,6 +20,7 @@ func main() {
 			if len(evt) > 0 {
 				jsonPath := fmt.Sprintf(".%s.%s.json", r.URL.Path, evt)
 				log.Println("Response with file: ", jsonPath)
+				time.Sleep(500 * time.Millisecond)
 				http.ServeFile(w, r, jsonPath)
 				return
 			}
